@@ -3,8 +3,11 @@ import pdfkit
 import os
 import json
 from datetime import datetime
+from whitenoise import WhiteNoise
 
 app = Flask(__name__)
+app.wsgi_app = WhiteNoise(app.wsgi_app)
+app.wsgi_app.add_files('./image/', prefix='image/')
 
 @app.route('/')
 def index():
