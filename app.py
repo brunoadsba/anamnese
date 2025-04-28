@@ -28,6 +28,10 @@ def gerar_pdf():
         # Certifica-se de que o diretório existe
         os.makedirs('pdfs', exist_ok=True)
         
+        # Preparar os dados da imagem - caminho absoluto para a logo
+        logo_file = os.path.abspath(os.path.join('image', 'logo_bg.png'))
+        form_data['logo_path'] = f"file:///{logo_file}"
+        
         # Renderiza o template HTML com os dados do formulário
         html_content = render_template('pdf_template.html', data=form_data)
         
@@ -39,11 +43,14 @@ def gerar_pdf():
             'margin-bottom': '0.75in',
             'margin-left': '0.75in',
             'encoding': "UTF-8",
-            'no-outline': None
+            'enable-local-file-access': None  # Permite acesso a arquivos locais
         }
         
+        # Define o caminho para o executável wkhtmltopdf
+        config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
+        
         # Gera o PDF
-        pdfkit.from_string(html_content, pdf_path, options=options)
+        pdfkit.from_string(html_content, pdf_path, options=options, configuration=config)
         
         # Retorna o caminho do PDF gerado
         return jsonify({
