@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anamnese Psicanalítica - {{ data.nome }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.4;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 10px;
+        }
+        .logo {
+            max-height: 80px;
+        }
+        h1 {
+            color: #2563eb;
+            font-size: 24px;
+            margin: 0;
+        }
+        .section {
+            margin-bottom: 15px;
+        }
+        .section-title {
+            font-weight: bold;
+            color: #2563eb;
+            font-size: 16px;
+            margin: 20px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .field {
+            margin-bottom: 8px;
+        }
+        .label {
+            font-weight: bold;
+            display: inline-block;
+            min-width: 150px;
+        }
+        .value {
+            display: inline-block;
+        }
+        .checkbox-value {
+            margin-left: 5px;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Anamnese Psicanalítica</h1>
+        <img src="{{ data.logo_path|default('image/logo_bg.png') }}" alt="Logo" class="logo">
+    </div>
+    
+    <!-- Dados Pessoais -->
+    <div class="section">
+        <div class="section-title">Dados Pessoais</div>
+        <div class="field">
+            <span class="label">Nome:</span>
+            <span class="value">{{ data.nome }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Data de Nascimento:</span>
+            <span class="value">{{ data.data_nasc }}</span>
+            <span class="label" style="margin-left: 20px;">Idade:</span>
+            <span class="value">{{ data.idade }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Sexo:</span>
+            <span class="value">{{ data.sexo }}</span>
+            <span class="label" style="margin-left: 20px;">Estado Civil:</span>
+            <span class="value">{{ data.estado_civil }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Orient. Sexual:</span>
+            <span class="value">{{ data.orient_sexual }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Religião:</span>
+            <span class="value">{{ data.religiao }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Cidade:</span>
+            <span class="value">{{ data.cidade }}</span>
+            <span class="label" style="margin-left: 20px;">Estado:</span>
+            <span class="value">{{ data.estado }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Telefone:</span>
+            <span class="value">{{ data.tel }}</span>
+        </div>
+        <div class="field">
+            <span class="label">E-mail:</span>
+            <span class="value">{{ data.email }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Escolaridade:</span>
+            <span class="value">{{ data.escolaridade }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Profissão:</span>
+            <span class="value">{{ data.profissao }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Empresa:</span>
+            <span class="value">{{ data.empresa }}</span>
+        </div>
+    </div>
+    
+    <!-- Família e Relacionamentos -->
+    <div class="section">
+        <div class="section-title">Família e Relacionamentos</div>
+        <div class="field">
+            <span class="label">Cônjuge:</span>
+            <span class="value">{{ data.conjuge }}</span>
+            <span class="label" style="margin-left: 20px;">Idade:</span>
+            <span class="value">{{ data.conjuge_idade }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Profissão (cônjuge):</span>
+            <span class="value">{{ data.conjuge_profissao }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Filhos:</span>
+            <span class="value">{{ data.filhos }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Pai:</span>
+            <span class="value">{{ data.pai }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Mãe:</span>
+            <span class="value">{{ data.mae }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Número de irmãos:</span>
+            <span class="value">{{ data.num_irmaos }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Relação com irmãos:</span>
+            <span class="value">{{ data.relacao_irmaos }}</span>
+        </div>
+    </div>
+    
+    <!-- Queixas e Terapia Anterior -->
+    <div class="section">
+        <div class="section-title">Queixas e Terapia Anterior</div>
+        <div class="field">
+            <span class="label">Principais queixas:</span>
+            <span class="value">{{ data.principais_queixas }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Fez terapia antes?</span>
+            <span class="value">
+                {% if data.terapia_sim %} Sim {% else %} Não {% endif %}
+            </span>
+            <span class="label" style="margin-left: 20px;">Quando?</span>
+            <span class="value">{{ data.terapia_quando }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Por quanto tempo?</span>
+            <span class="value">{{ data.tempo_terapia }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Motivo interrupção:</span>
+            <span class="value">{{ data.motivo_interrupcao }}</span>
+        </div>
+    </div>
+    
+    <!-- Histórico Clínico -->
+    <div class="section">
+        <div class="section-title">Histórico Clínico</div>
+        <div class="field">
+            <span class="label">Doenças físicas:</span>
+            <span class="value">{{ data.doencas_fisicas }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Transt. psiquiátricos (pessoais):</span>
+            <span class="value">{{ data.transtorno_pessoal }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Transt. psiquiátricos (familiares):</span>
+            <span class="value">{{ data.transtorno_familiar }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Doenças importantes:</span>
+            <span class="value">{{ data.doencas_importantes }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Medicação atual:</span>
+            <span class="value">{{ data.medicacao_atual }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Doenças importantes (cont.):</span>
+            <span class="value">{{ data.doencas_importantes_2 }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Medicação atual (cont.):</span>
+            <span class="value">{{ data.medicacao_atual_2 }}</span>
+        </div>
+    </div>
+    
+    <!-- Hábitos e Eventos Significativos -->
+    <div class="section">
+        <div class="section-title">Hábitos e Eventos Significativos</div>
+        <div class="field">
+            <span class="label">Fatores de estresse atuais:</span>
+            <span class="value">{{ data.fatores_estresse_atuais }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Eventos traumáticos:</span>
+            <span class="value">{{ data.eventos_traumaticos }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Uso de drogas?</span>
+            <span class="value">
+                {% if data.drogas_sim %} Sim {% else %} Não {% endif %}
+            </span>
+            <span class="label" style="margin-left: 20px;">Quais/Freq.?</span>
+            <span class="value">{{ data.drogas_quais_freq }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Uso de álcool?</span>
+            <span class="value">
+                {% if data.alcool_sim %} Sim {% else %} Não {% endif %}
+            </span>
+            <span class="label" style="margin-left: 20px;">Quant./Freq.?</span>
+            <span class="value">{{ data.alcool_quant_freq }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Tabagismo?</span>
+            <span class="value">
+                {% if data.tabagismo_sim %} Sim {% else %} Não {% endif %}
+            </span>
+            <span class="label" style="margin-left: 20px;">Quant. diária:</span>
+            <span class="value">{{ data.tabagismo_quant }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Hábitos de sono:</span>
+            <span class="value">{{ data.habitos_sono }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Atividade física:</span>
+            <span class="value">{{ data.atividade_fisica }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Gatilhos emocionais:</span>
+            <span class="value">{{ data.gatilhos_emocionais }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Tentativa de suicídio?</span>
+            <span class="value">
+                {% if data.suicidio_sim %} Sim {% else %} Não {% endif %}
+            </span>
+            <span class="label" style="margin-left: 20px;">Quando?</span>
+            <span class="value">{{ data.suicidio_quando }}</span>
+        </div>
+    </div>
+    
+    <!-- Observações Gerais -->
+    <div class="section">
+        <div class="section-title">Observações Gerais</div>
+        <div class="field">
+            <p>{{ data.observacoes_gerais }}</p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Anamnese gerada em {{ data.data_geracao|default(now) }}</p>
+    </div>
+</body>
+</html> 

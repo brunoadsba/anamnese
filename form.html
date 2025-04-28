@@ -113,6 +113,62 @@
         color: #000 !important;
       }
     }
+    .btn {
+      display: inline-block;
+      font-weight: 500;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      user-select: none;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: 0.25rem;
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    .btn-primary {
+      color: #fff;
+      background-color: #2563eb;
+      border-color: #2563eb;
+    }
+    .btn-primary:hover {
+      background-color: #1d4ed8;
+      border-color: #1e40af;
+    }
+    .btn-success {
+      color: #fff;
+      background-color: #10b981;
+      border-color: #10b981;
+    }
+    .btn-success:hover {
+      background-color: #059669;
+      border-color: #047857;
+    }
+    .message {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+    }
+    .message-success {
+      background-color: #d1fae5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .message-error {
+      background-color: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+    }
+    .hidden {
+      display: none;
+    }
+    .actions-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+      padding: 15px 0;
+      border-top: 1px solid #e5e7eb;
+    }
   </style>
 </head>
 <body class="mx-auto px-4 py-6 max-w-4xl">
@@ -400,5 +456,80 @@
     <div class="section-title">Observações Gerais</div>
     <textarea rows="5" name="observacoes_gerais" class="mb-3"></textarea>
   </form>
+
+  <!-- Mensagens de sucesso/erro -->
+  <div id="message-container" class="hidden message"></div>
+
+  <!-- Barra de Ações -->
+  <div class="actions-bar">
+    <button type="button" id="btn-gerar-pdf" class="btn btn-primary">Gerar PDF</button>
+    <a id="download-link" href="#" class="btn btn-success ml-3 hidden">Baixar PDF</a>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const formElements = document.querySelectorAll('form');
+      const btnGerarPdf = document.getElementById('btn-gerar-pdf');
+      const downloadLink = document.getElementById('download-link');
+      const messageContainer = document.getElementById('message-container');
+      
+      btnGerarPdf.addEventListener('click', function() {
+        // Coletar dados de todos os formulários
+        const formData = {};
+        
+        // Processa todos os formulários
+        formElements.forEach(form => {
+          // Percorre todos os inputs, selects e textareas
+          Array.from(form.elements).forEach(element => {
+            if (element.name) {
+              if (element.type === 'checkbox') {
+                formData[element.name] = element.checked;
+              } else {
+                formData[element.name] = element.value;
+              }
+            }
+          });
+        });
+        
+        // Adiciona timestamp de geração
+        formData.data_geracao = new Date().toLocaleString('pt-BR');
+        
+        // Envia os dados para o servidor
+        fetch('/gerar-pdf', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Mostra mensagem de sucesso
+            messageContainer.textContent = data.message;
+            messageContainer.className = 'message message-success';
+            
+            // Configura link para download
+            downloadLink.href = `/pdfs/${data.filename}`;
+            downloadLink.classList.remove('hidden');
+            
+            // Rola para o topo da página
+            window.scrollTo(0, 0);
+          } else {
+            // Mostra mensagem de erro
+            messageContainer.textContent = data.message;
+            messageContainer.className = 'message message-error';
+            downloadLink.classList.add('hidden');
+          }
+        })
+        .catch(error => {
+          console.error('Erro:', error);
+          messageContainer.textContent = 'Erro ao gerar PDF. Por favor, tente novamente.';
+          messageContainer.className = 'message message-error';
+          downloadLink.classList.add('hidden');
+        });
+      });
+    });
+  </script>
 </body>
 </html>
