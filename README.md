@@ -28,7 +28,7 @@ cd anamnese
 ```
 python -m venv venv
 source venv/bin/activate  # No Windows: venv\Scripts\activate
-pip install flask pdfkit
+pip install -r requirements.txt
 ```
 
 3. Instale o wkhtmltopdf (necessário para o PDFKit):
@@ -56,6 +56,7 @@ http://127.0.0.1:5000
 - `form.html` - Formulário de anamnese
 - `templates/pdf_template.html` - Template para geração de PDF
 - `image/` - Diretório com imagens e logo
+- `requirements.txt` - Lista de dependências do projeto
 
 ## Licença
 
