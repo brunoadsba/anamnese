@@ -457,11 +457,11 @@
     <textarea rows="5" name="observacoes_gerais" class="mb-3"></textarea>
   </form>
 
-  <!-- Mensagens de sucesso/erro -->
-  <div id="message-container" class="hidden message"></div>
-
   <!-- Barra de Ações -->
   <div class="actions-bar">
+    <!-- Mensagens de sucesso/erro -->
+    <div id="message-container" class="hidden message mr-auto"></div>
+    
     <button type="button" id="btn-gerar-pdf" class="btn btn-primary">Gerar PDF</button>
     <a id="download-link" href="#" class="btn btn-success ml-3 hidden">Baixar PDF</a>
   </div>
@@ -508,13 +508,11 @@
             // Mostra mensagem de sucesso
             messageContainer.textContent = data.message;
             messageContainer.className = 'message message-success';
+            messageContainer.classList.remove('hidden');
             
             // Configura link para download
             downloadLink.href = `/pdfs/${data.filename}`;
             downloadLink.classList.remove('hidden');
-            
-            // Rola para o topo da página
-            window.scrollTo(0, 0);
           } else {
             // Mostra mensagem de erro
             messageContainer.textContent = data.message;
