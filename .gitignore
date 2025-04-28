@@ -1,0 +1,28 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ambiente virtual
+venv/
+ENV/
+
+# Arquivo de configuração
+instance/
+.webassets-cache
+
+# Arquivos de log
+*.log
+
+# PDFs gerados
+pdfs/
+
+# Arquivos temporários
+.DS_Store
+Thumbs.db
+
+# IDE específico
+.idea/
+.vscode/
+*.swp
+*.swo 
