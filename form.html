@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Formulário de Anamnese Psicanalítica</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: #fff;
+    }
+    input, textarea, select {
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      width: 100%;
+      font-size: 1rem;
+    }
+    .section-title {
+      font-weight: 700;
+      font-size: 1.12rem;
+      margin-bottom: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .sub-title {
+      font-weight: 600;
+      margin-top: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    .field-label {
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+      display: inline-block;
+    }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .logo {
+      max-height: 120px;
+      width: auto;
+      background-color: transparent;
+    }
+    @media print {
+      body {
+        background: #fff !important;
+      }
+      input, textarea, select {
+        border: 1px solid #aaa !important;
+        background: #fff !important;
+        color: #000 !important;
+      }
+    }
+  </style>
+</head>
+<body class="mx-auto px-3 py-6 max-w-4xl">
+  <div class="header-container">
+    <h1 class="text-2xl font-bold">Anamnese Psicanalítica</h1>
+    <img src="image/logo_bg.png" alt="Logo" class="logo">
+  </div>
+  
+  <!-- FORMULÁRIO 1 -->
+  <form>
+    <!-- Dados Pessoais -->
+    <div class="section-title">Dados Pessoais</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div>
+        <label class="field-label">Nome:</label>
+        <input type="text" name="nome">
+      </div>
+      <div>
+        <label class="field-label">Data nasc.:</label>
+        <input type="text" name="data_nasc" placeholder="__/__/__" style="width:7rem;display:inline-block;">
+        <label class="field-label ml-2">Idade:</label>
+        <input type="text" name="idade" style="width:3rem;display:inline-block;">
+      </div>
+      <div>
+        <label class="field-label">Sexo:</label>
+        <input type="text" name="sexo" style="width:5rem;display:inline-block;">
+        <label class="field-label ml-2">Estado Civil:</label>
+        <input type="text" name="estado_civil" style="width:8rem;display:inline-block;">
+      </div>
+      <div>
+        <label class="field-label">Orient. Sexual:</label>
+        <input type="text" name="orient_sexual">
+      </div>
+      <div>
+        <label class="field-label">Religião:</label>
+        <input type="text" name="religiao">
+      </div>
+      <div>
+        <label class="field-label">Cidade:</label>
+        <input type="text" name="cidade" style="width:8rem;display:inline-block;">
+        <label class="field-label ml-2">Estado:</label>
+        <input type="text" name="estado" style="width:3rem;display:inline-block;">
+        <label class="field-label ml-2">Tel:</label>
+        <input type="text" name="tel" style="width:8rem;display:inline-block;">
+      </div>
+      <div>
+        <label class="field-label">E-mail:</label>
+        <input type="text" name="email">
+      </div>
+      <div>
+        <label class="field-label">Escolaridade:</label>
+        <input type="text" name="escolaridade">
+      </div>
+      <div>
+        <label class="field-label">Profissão:</label>
+        <input type="text" name="profissao">
+      </div>
+      <div>
+        <label class="field-label">Empresa:</label>
+        <input type="text" name="empresa">
+      </div>
+    </div>
+    <!-- Fim Dados Pessoais -->
+
+    <!-- Família e Relacionamentos -->
+    <div class="section-title">Família e Relacionamentos</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div>
+        <label class="field-label">Cônjuge:</label>
+        <input type="text" name="conjuge" style="width:10rem;display:inline-block;">
+        <label class="field-label ml-2">Idade:</label>
+        <input type="text" name="conjuge_idade" style="width:3rem;display:inline-block;">
+        <label class="field-label ml-2">Profissão:</label>
+        <input type="text" name="conjuge_profissao" style="width:8rem;display:inline-block;">
+      </div>
+      <div>
+        <label class="field-label">Filhos (nome, idade):</label>
+        <input type="text" name="filhos">
+      </div>
+      <div>
+        <label class="field-label">Pai:</label>
+        <input type="text" name="pai">
+      </div>
+      <div>
+        <label class="field-label">Mãe:</label>
+        <input type="text" name="mae">
+      </div>
+      <div>
+        <label class="field-label">Número de irmãos:</label>
+        <input type="text" name="num_irmaos" style="width:3rem;display:inline-block;">
+        <label class="field-label ml-2">Relação com irmãos:</label>
+        <input type="text" name="relacao_irmaos" style="width:15rem;display:inline-block;">
+      </div>
+    </div>
+    <!-- Fim Família e Relacionamentos -->
+
+    <!-- Queixas e Terapia Anterior -->
+    <div class="section-title">Queixas e Terapia Anterior</div>
+    <div>
+      <label class="field-label">Principais queixas:</label>
+      <textarea rows="2" name="principais_queixas"></textarea>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+      <div>
+        <span class="field-label">Fez terapia antes?</span>
+        <label class="ml-2"><input type="checkbox" name="terapia_sim"> Sim</label>
+        <label class="ml-2"><input type="checkbox" name="terapia_nao"> Não</label>
+        <label class="ml-2">Quando?</label>
+        <input type="text" name="terapia_quando" style="width:6rem;display:inline-block;">
+      </div>
+      <div>
+        <label class="field-label">Por quanto tempo?</label>
+        <input type="text" name="tempo_terapia" style="width:7rem;display:inline-block; margin-right:10px;">
+        <label class="field-label ml-2">Motivo interrupção:</label>
+        <input type="text" name="motivo_interrupcao" style="width:12rem;display:inline-block;">
+      </div>
+    </div>
+    <!-- Fim Queixas e Terapia Anterior -->
+
+    <!-- Histórico Clínico -->
+    <div class="section-title">Histórico Clínico</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div>
+        <label class="field-label">Doenças físicas:</label>
+        <input type="text" name="doencas_fisicas">
+      </div>
+      <div>
+        <label class="field-label">Transt. psiquiátricos (pessoais):</label>
+        <input type="text" name="transtorno_pessoal">
+      </div>
+      <div>
+        <label class="field-label">Transt. psiquiátricos (familiares):</label>
+        <input type="text" name="transtorno_familiar">
+      </div>
+      <div>
+        <label class="field-label">Doenças importantes:</label>
+        <input type="text" name="doencas_importantes">
+      </div>
+      <div class="md:col-span-2">
+        <label class="field-label">Medicação atual:</label>
+        <input type="text" name="medicacao_atual">
+      </div>
+    </div>
+    <!-- Fim Histórico Clínico -->
+  </form>
+
+
+  <!-- FORMULÁRIO 2 -->
+  <form class="mt-10">
+    <div class="section-title">Continuação do Histórico Clínico</div>
+    <div>
+      <label class="field-label">Doenças importantes:</label>
+      <input type="text" name="doencas_importantes_2">
+    </div>
+    <div class="mt-2">
+      <label class="field-label">Medicação atual:</label>
+      <input type="text" name="medicacao_atual_2">
+    </div>
+    <!-- Hábitos e Eventos Significativos -->
+    <div class="section-title">Hábitos e Eventos Significativos</div>
+    <div>
+      <label class="field-label">Fatores de estresse atuais:</label>
+      <input type="text" name="fatores_estresse_atuais">
+    </div>
+    <div class="mt-2">
+      <label class="field-label">Eventos traumáticos:</label>
+      <input type="text" name="eventos_traumaticos">
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+      <div>
+        <label class="field-label">Uso de drogas?</label>
+        <label class="ml-2"><input type="checkbox" name="drogas_sim"> Sim</label>
+        <label class="ml-2"><input type="checkbox" name="drogas_nao"> Não</label>
+        <span class="ml-2">Quais/Freq.?</span>
+        <input type="text" name="drogas_quais_freq" style="width:7rem;display:inline-block;">
+      </div>
+      <div>
+        <label class="field-label">Uso de álcool?</label>
+        <label class="ml-2"><input type="checkbox" name="alcool_sim"> Sim</label>
+        <label class="ml-2"><input type="checkbox" name="alcool_nao"> Não</label>
+        <span class="ml-2">Quant./Freq.?</span>
+        <input type="text" name="alcool_quant_freq" style="width:7rem;display:inline-block;">
+      </div>
+      <div>
+        <label class="field-label">Tabagismo?</label>
+        <label class="ml-2"><input type="checkbox" name="tabagismo_sim"> Sim</label>
+        <label class="ml-2"><input type="checkbox" name="tabagismo_nao"> Não</label>
+        <span class="ml-2">Quant. diária:</span>
+        <input type="text" name="tabagismo_quant" style="width:7rem;display:inline-block;">
+      </div>
+      <div>
+        <label class="field-label">Hábitos de sono:</label>
+        <input type="text" name="habitos_sono" style="width:7rem;display:inline-block;">
+        <span class="ml-2">Atividade física:</span>
+        <input type="text" name="atividade_fisica" style="width:7rem;display:inline-block;">
+      </div>
+    </div>
+    <div class="mt-2">
+      <label class="field-label">Gatilhos emocionais:</label>
+      <input type="text" name="gatilhos_emocionais">
+    </div>
+    <div class="mt-2">
+      <label class="field-label">Tentativa de suicídio?</label>
+      <label class="ml-2"><input type="checkbox" name="suicidio_sim"> Sim</label>
+      <label class="ml-2"><input type="checkbox" name="suicidio_nao"> Não</label>
+      <span class="ml-2">Quando?</span>
+      <input type="text" name="suicidio_quando" style="width:7rem;display:inline-block;">
+    </div>
+
+    <!-- Observações Gerais -->
+    <div class="section-title">Observações Gerais</div>
+    <textarea rows="5" name="observacoes_gerais"></textarea>
+  </form>
+</body>
+</html>
