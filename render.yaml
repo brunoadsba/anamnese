@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: anamnese
+    env: python
+    buildCommand: pip install -r requirements.txt && chmod +x startup.sh
+    startCommand: ./startup.sh
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+      - key: RENDER
+        value: true
+    buildFilter:
+      paths:
+        - requirements.txt
+        - app.py
+        - form.html
+        - templates/**
+        - image/**
+      ignoredPaths:
+        - venv/**
+    preDeployCommand: |
+      apt-get update -y && apt-get install -y wkhtmltopdf 

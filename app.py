@@ -47,7 +47,12 @@ def gerar_pdf():
         }
         
         # Define o caminho para o executável wkhtmltopdf
-        config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
+        # No Render, o wkhtmltopdf está no path padrão
+        wkhtmltopdf_path = '/usr/bin/wkhtmltopdf'
+        if os.environ.get('RENDER'):
+            wkhtmltopdf_path = 'wkhtmltopdf'
+            
+        config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
         
         # Gera o PDF
         pdfkit.from_string(html_content, pdf_path, options=options, configuration=config)
@@ -70,4 +75,6 @@ def serve_pdf(filename):
     return send_from_directory('pdfs', filename)
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    # Obter porta do ambiente (necessário para o Render)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False) 

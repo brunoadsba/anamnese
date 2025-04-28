@@ -16,7 +16,7 @@ Um sistema web para preenchimento e geração de formulários de anamnese psican
 - Flask (Python) para o backend
 - PDFKit para geração de documentos PDF
 
-## Instalação
+## Instalação Local
 
 1. Clone o repositório:
 ```
@@ -50,6 +50,34 @@ python app.py
 http://127.0.0.1:5000
 ```
 
+## Deploy no Render
+
+Este projeto está configurado para fácil deploy no [Render](https://render.com).
+
+### Passos para deploy:
+
+1. Crie uma conta no [Render](https://render.com)
+2. Conecte sua conta GitHub ao Render
+3. Clique em "New Web Service"
+4. Selecione o repositório do projeto
+5. O Render detectará automaticamente que é um aplicativo Python
+6. Configure as seguintes opções:
+   - **Nome**: anamnese (ou outro nome de sua escolha)
+   - **Runtime**: Python 3
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn app:app`
+7. Clique em "Advanced" e adicione a variável de ambiente:
+   - `RENDER=true`
+8. Clique em "Create Web Service"
+
+O Render irá automaticamente instalar o wkhtmltopdf e outras dependências necessárias conforme definido no arquivo `render.yaml`.
+
+### Arquivos de configuração para o Render:
+
+- `render.yaml`: Configuração principal para o Render
+- `Procfile`: Define o comando para iniciar o aplicativo
+- `requirements.txt`: Lista todas as dependências Python
+
 ## Estrutura do Projeto
 
 - `app.py` - Aplicação Flask principal
@@ -57,6 +85,7 @@ http://127.0.0.1:5000
 - `templates/pdf_template.html` - Template para geração de PDF
 - `image/` - Diretório com imagens e logo
 - `requirements.txt` - Lista de dependências do projeto
+- `render.yaml` - Configuração para deploy no Render
 
 ## Licença
 
