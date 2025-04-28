@@ -6,4 +6,4 @@ mkdir -p pdfs
 chmod 755 pdfs
 
 # Executar o aplicativo
-exec gunicorn app:app 
+exec gunicorn app:app --bind=0.0.0.0:$PORT --log-file=- 
