@@ -2,6 +2,7 @@ from flask import Flask, render_template, send_from_directory, request, jsonify,
 import pdfkit
 import os
 import json
+import subprocess
 from datetime import datetime
 from whitenoise import WhiteNoise
 
@@ -50,12 +51,37 @@ def gerar_pdf():
         }
         
         # Define o caminho para o executável wkhtmltopdf
-        # No Render, o wkhtmltopdf está no path padrão
-        wkhtmltopdf_path = '/usr/bin/wkhtmltopdf'
-        if os.environ.get('RENDER'):
-            wkhtmltopdf_path = 'wkhtmltopdf'
+        wkhtmltopdf_path = None
+        
+        # Primeiro tenta obter do ambiente (definido no startup.sh)
+        if os.environ.get('WKHTMLTOPDF_PATH'):
+            wkhtmltopdf_path = os.environ.get('WKHTMLTOPDF_PATH')
+        # Depois tenta encontrar no PATH ou em locais comuns
+        else:
+            try:
+                # Tenta usar o comando 'which' para localizar o executável
+                wkhtmltopdf_path = subprocess.check_output(['which', 'wkhtmltopdf']).decode('utf-8').strip()
+            except:
+                # Caminhos comuns para o wkhtmltopdf
+                possible_paths = [
+                    '/usr/bin/wkhtmltopdf',
+                    '/usr/local/bin/wkhtmltopdf',
+                    '/opt/wkhtmltopdf/bin/wkhtmltopdf',
+                    'wkhtmltopdf'  # Tenta o comando diretamente
+                ]
+                
+                for path in possible_paths:
+                    if os.path.exists(path) or path == 'wkhtmltopdf':
+                        wkhtmltopdf_path = path
+                        break
+        
+        if not wkhtmltopdf_path:
+            raise Exception("wkhtmltopdf não encontrado. Por favor, instale-o ou forneça o caminho correto.")
             
         config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+        
+        # Log para debug
+        print(f"Usando wkhtmltopdf em: {wkhtmltopdf_path}")
         
         # Gera o PDF
         pdfkit.from_string(html_content, pdf_path, options=options, configuration=config)
